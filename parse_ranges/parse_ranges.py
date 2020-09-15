@@ -1,21 +1,17 @@
 def parse_ranges(intake):
-    num_list = [(a,b+1) for (a,b) in [[int(x), int(y)] for (x, y) in [pair.split('-') for pair in intake.split(',')]]]
+    num_list2 = []
+    for pair in intake.split(','):
+        if '-' in pair:
+            x,y = pair.split('-')
+            num_list2.append([int(x), int(y)+1])
+        else:
+           num_list2.append([int(pair), int(pair)+1])
 
-    for pair in num_list:
+    for pair in num_list2:
         a,b = pair
         numbers = range(a,b)
         for num in numbers:
             yield num
-test = '1-2,4-4,8-10'
-hest = parse_ranges(test)
-
-print(next(hest))
-print(next(hest))
-print(next(hest))
-# print(next(parse_ranges(test)))
-# print(next(parse_ranges(test)))
-# print(next(parse_ranges(test)))
-# print(next(parse_ranges(test)))
 
 
 
