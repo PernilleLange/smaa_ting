@@ -1,9 +1,8 @@
 import sys
-import argparse
 
-def pipe2comma(delimiter, line):
+def pipe2comma(line):
     line_out = ''
-    for cell in line.split(delimiter):
+    for cell in line.split('|'):
         contains_comma = False
         prelim_cell = ''
         for char in cell:
@@ -21,10 +20,10 @@ def pipe2comma(delimiter, line):
     return line_out[:-1] + '\n'
 
 
-def fix_csv(delimiter,read_file, write_file):
+def fix_csv(read_file, write_file):
     with open(read_file, 'rt') as f_read, open(write_file, 'wt') as f_write:
         for row in f_read.readlines():
-            f_write.write(pipe2comma(delimiter,row))
+            f_write.write(pipe2comma(row))
 
 if len(sys.argv) > 3:
     raise BaseException
